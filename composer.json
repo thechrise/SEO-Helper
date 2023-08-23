@@ -5,27 +5,33 @@
         "laravel", "seo", "google", "bing", "alexa", "yandex", "webmaster", "helper",
         "title", "description", "keywords", "metas", "tags", "twitter", "opengraph", "og"
     ],
-    "homepage": "https://github.com/ARCANEDEV/SEO-Helper",
+    "homepage": "https://github.com/thechrise/SEO-Helper",
     "authors": [
         {
             "name":     "ARCANEDEV",
             "email":    "arcanedev.maroc@gmail.com",
             "homepage": "https://github.com/arcanedev-maroc",
             "role":     "Developer"
+        },
+        {
+            "name":     "Chris Evans",
+            "email":    "chris.t.evans@icloud.com",
+            "homepage": "https://github.com/thechrise",
+            "role":     "Forker"
         }
     ],
     "type":    "library",
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
-        "arcanedev/php-html": "^6.0",
-        "arcanedev/support": "^9.0"
+        "php": "^8.1",
+        "thechrise/php-html": "^6.0|^7.0",
+        "arcanedev/support": "^9.0|^10.0"
     },
     "require-dev": {
         "ext-dom": "*",
-        "laravel/framework": "^9.0",
-        "orchestra/testbench-core": "^7.0",
-        "phpunit/phpunit": "^9.5.10"
+        "laravel/framework": "^9.0|^10.0",
+        "orchestra/testbench-core": "^7.0|^8.0",
+        "phpunit/phpunit": "^9.5.10|^10.0"
     },
     "autoload": {
         "psr-4": {
