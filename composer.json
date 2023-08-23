@@ -1,5 +1,5 @@
 {
-    "name":        "arcanedev/seo-helper",
+    "name":        "thechrise/seo-helper",
     "description": "SEO Helper is a framework agnostic package that provides tools & helpers for SEO (Laravel supported).",
     "keywords": [
         "laravel", "seo", "google", "bing", "alexa", "yandex", "webmaster", "helper",
