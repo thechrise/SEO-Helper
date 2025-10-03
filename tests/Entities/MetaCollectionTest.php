@@ -6,6 +6,7 @@ namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\MetaCollection;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     MetaCollectionTest
@@ -46,7 +47,7 @@ class MetaCollectionTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -62,7 +63,7 @@ class MetaCollectionTest extends TestCase
         static::assertCount(0, $this->metas);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_meta(): void
     {
         $this->metas->addOne('robots', 'noindex, nofollow');
@@ -74,7 +75,7 @@ class MetaCollectionTest extends TestCase
         static::assertCount(2, $this->metas);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_meta_tags(): void
     {
         $this->metas->addOne('robots', 'noindex, nofollow');
@@ -85,13 +86,13 @@ class MetaCollectionTest extends TestCase
         static::assertSame($expected, (string) $this->metas);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_link_tags(): void
     {
         $this->metas->addOne('canonical', $this->baseUrl);
 
         static::assertSame(
-            '<link rel="canonical" href="'.$this->baseUrl.'">',
+            '<link rel="canonical" href="' . $this->baseUrl . '">',
             $this->metas->render()
         );
     }

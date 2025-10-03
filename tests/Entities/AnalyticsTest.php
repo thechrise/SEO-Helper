@@ -7,6 +7,7 @@ namespace Arcanedev\SeoHelper\Tests\Entities;
 use Arcanedev\SeoHelper\Entities\Analytics;
 use Arcanedev\SeoHelper\Tests\TestCase;
 use Arcanedev\SeoHelper\Tests\Traits\CanAssertsGoogleAnalytics;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     AnalyticsTest
@@ -55,7 +56,7 @@ class AnalyticsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -69,7 +70,7 @@ class AnalyticsTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_must_render_empty_on_init(): void
     {
         $this->analytics = new Analytics;
@@ -77,7 +78,7 @@ class AnalyticsTest extends TestCase
         static::assertEmpty($this->analytics->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render(): void
     {
         static::assertGoogleAnalytics('UA-12345678-9', $this->analytics->render());

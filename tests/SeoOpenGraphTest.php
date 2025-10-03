@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arcanedev\SeoHelper\Tests;
 
 use Arcanedev\SeoHelper\SeoOpenGraph;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     SeoOpenGraphTest
@@ -46,7 +47,7 @@ class SeoOpenGraphTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -60,7 +61,7 @@ class SeoOpenGraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_defaults(): void
     {
         $expectations = [
@@ -75,7 +76,7 @@ class SeoOpenGraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_prefix(): void
     {
         $this->seoOpenGraph->setPrefix('open-graph:');
@@ -92,7 +93,7 @@ class SeoOpenGraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_type(): void
     {
         $types = [
@@ -105,96 +106,101 @@ class SeoOpenGraphTest extends TestCase
         foreach ($types as $type) {
             $this->seoOpenGraph->setType($type);
 
-            $expected = '<meta property="og:type" content="'.$type.'">';
+            $expected = '<meta property="og:type" content="' . $type . '">';
 
             static::assertStringContainsString($expected, $this->seoOpenGraph->render());
             static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_title(): void
     {
         $title = 'Hello World';
 
         $this->seoOpenGraph->setTitle($title);
 
-        $expected = '<meta property="og:title" content="'.$title.'">';
+        $expected = '<meta property="og:title" content="' . $title . '">';
 
         static::assertStringContainsString($expected, $this->seoOpenGraph->render());
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_description(): void
     {
         $description = 'Hello World detailed description.';
 
         $this->seoOpenGraph->setDescription($description);
 
-        $expected = '<meta property="og:description" content="'.$description.'">';
+        $expected = '<meta property="og:description" content="' . $description . '">';
 
         static::assertStringContainsString($expected, $this->seoOpenGraph->render());
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_url(): void
     {
         $url = 'http://www.imdb.com/title/tt0080339/';
 
         $this->seoOpenGraph->setUrl($url);
 
-        $expected = '<meta property="og:url" content="'.$url.'">';
+        $expected = '<meta property="og:url" content="' . $url . '">';
 
         static::assertStringContainsString($expected, $this->seoOpenGraph->render());
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_image(): void
     {
         $image = 'http://ia.media-imdb.com/images/M/MV5BNDU2MjE4MTcwNl5BMl5BanBnXkFtZTgwNDExOTMxMDE@._V1_UY1200_CR90,0,630,1200_AL_.jpg';
 
         $this->seoOpenGraph->setImage($image);
 
-        $expected = '<meta property="og:image" content="'.$image.'">';
+        $expected = '<meta property="og:image" content="' . $image . '">';
 
         static::assertStringContainsString($expected, $this->seoOpenGraph->render());
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_site_name(): void
     {
         $siteName = 'My site name';
 
         $this->seoOpenGraph->setSiteName($siteName);
 
-        $expected = '<meta property="og:site_name" content="'.$siteName.'">';
+        $expected = '<meta property="og:site_name" content="' . $siteName . '">';
 
         static::assertStringContainsString($expected, $this->seoOpenGraph->render());
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_and_render_property(): void
     {
         $locales = [
-            'ar', 'en', 'en_US', 'es', 'fr', 'fr_FR',
+            'ar',
+            'en',
+            'en_US',
+            'es',
+            'fr',
+            'fr_FR',
         ];
 
         foreach ($locales as $locale) {
             $this->seoOpenGraph->addProperty('locale', $locale);
 
-            $expected = '<meta property="og:locale" content="'.$locale.'">';
+            $expected = '<meta property="og:locale" content="' . $locale . '">';
 
             static::assertStringContainsString($expected, $this->seoOpenGraph->render());
             static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_render_properties(): void
     {
         $properties = [
@@ -205,7 +211,7 @@ class SeoOpenGraphTest extends TestCase
         $expectations = [];
 
         foreach ($properties as $property => $content) {
-            $expectations[] = '<meta property="og:'.$property.'" content="'.$content.'">';
+            $expectations[] = '<meta property="og:' . $property . '" content="' . $content . '">';
         }
 
         $this->seoOpenGraph->addProperties($properties);
@@ -216,7 +222,7 @@ class SeoOpenGraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_enable_and_disable(): void
     {
         static::assertTrue($this->seoOpenGraph->isEnabled());
@@ -236,20 +242,20 @@ class SeoOpenGraphTest extends TestCase
         static::assertNotEmpty($this->seoOpenGraph->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_locale_property(): void
     {
         $locales = ['fr_FR', 'en_GB', 'es_ES'];
 
         foreach ($locales as $locale) {
             static::assertStringContainsString(
-                '<meta property="og:locale" content="'.$locale.'">',
+                '<meta property="og:locale" content="' . $locale . '">',
                 $this->seoOpenGraph->setLocale($locale)->render()
             );
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_alternative_properties(): void
     {
         $this->seoOpenGraph->setAlternativeLocales(['fr_FR', 'en_GB', 'es_ES']);

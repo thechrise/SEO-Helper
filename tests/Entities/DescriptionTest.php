@@ -7,6 +7,7 @@ namespace Arcanedev\SeoHelper\Tests\Entities;
 use Arcanedev\SeoHelper\Entities\Description;
 use Arcanedev\SeoHelper\Tests\TestCase;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     DescriptionTest
@@ -48,7 +49,7 @@ class DescriptionTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -62,7 +63,7 @@ class DescriptionTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_make(): void
     {
         $this->description = Description::make('Cool description about this package');
@@ -78,7 +79,7 @@ class DescriptionTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_default_description(): void
     {
         $content = $this->getDefaultContent();
@@ -86,7 +87,7 @@ class DescriptionTest extends TestCase
         static::assertSame($content, $this->description->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_get_content(): void
     {
         $content = 'Cool description about this package';
@@ -96,7 +97,7 @@ class DescriptionTest extends TestCase
         static::assertSame($content, $this->description->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_get_max_length(): void
     {
         $max = 150;
@@ -106,7 +107,7 @@ class DescriptionTest extends TestCase
         static::assertSame($max, $this->description->getMax());
     }
 
-    /** @test */
+    #[Test]
     public function it_must_throw_invalid_max_length_type(): void
     {
         $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
@@ -115,7 +116,7 @@ class DescriptionTest extends TestCase
         $this->description->setMax(null);
     }
 
-    /** @test */
+    #[Test]
     public function it_must_throw_invalid_max_length_value(): void
     {
         $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
@@ -124,20 +125,20 @@ class DescriptionTest extends TestCase
         $this->description->setMax(0);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render(): void
     {
         $this->description->set(
             $description = 'Cool description about this package'
         );
 
-        $expected = '<meta name="description" content="'.$description.'">';
+        $expected = '<meta name="description" content="' . $description . '">';
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->description);
         static::assertHtmlStringEqualsHtmlString($expected, $this->description->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_empty_description(): void
     {
         $this->description->set('');
@@ -146,7 +147,7 @@ class DescriptionTest extends TestCase
         static::assertEmpty((string) $this->description);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_long_title(): void
     {
         $content = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ullamco laboris aliquip commodo.';
@@ -154,7 +155,7 @@ class DescriptionTest extends TestCase
 
         $this->description->set($content)->setMax($max);
 
-        $expected = '<meta name="description" content="'.Str::limit($content, $max).'">';
+        $expected = '<meta name="description" content="' . Str::limit($content, $max) . '">';
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->description);
         static::assertHtmlStringEqualsHtmlString($expected, $this->description->render());

@@ -9,7 +9,7 @@
             <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
-    <coverage processUncoveredFiles="true">
+    <!-- <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">./src</directory>
         </include>
@@ -18,7 +18,7 @@
             <html outputDirectory="build/coverage/html"/>
             <text outputFile="build/coverage/coverage.txt" showOnlySummary="true"/>
         </report>
-    </coverage>
+    </coverage> -->
     <php>
         <env name="APP_ENV" value="testing"/>
     </php>

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Arcanedev\SeoHelper\Tests;
 
 use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     SeoHelperTest
@@ -45,7 +46,7 @@ class SeoHelperTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -59,7 +60,7 @@ class SeoHelperTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated_with_helper(): void
     {
         $this->seoHelper = seo_helper();
@@ -74,7 +75,7 @@ class SeoHelperTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_seo_meta(): void
     {
         $seoMeta = $this->seoHelper->meta();
@@ -90,7 +91,7 @@ class SeoHelperTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_seo_open_graph(): void
     {
         $ogs = [
@@ -111,7 +112,7 @@ class SeoHelperTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_title(): void
     {
         $title        = 'Hello World';
@@ -119,9 +120,9 @@ class SeoHelperTest extends TestCase
         $separator    = '|';
         $expectations = [
             "<title>$title $separator $siteName</title>",
-            '<meta property="og:title" content="'.$title.'">',
-            '<meta property="og:site_name" content="'.$siteName.'">',
-            '<meta name="twitter:title" content="'.$title.'">',
+            '<meta property="og:title" content="' . $title . '">',
+            '<meta property="og:site_name" content="' . $siteName . '">',
+            '<meta name="twitter:title" content="' . $title . '">',
         ];
 
         $this->seoHelper->setTitle($title, $siteName, $separator);
@@ -132,20 +133,20 @@ class SeoHelperTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_site_name(): void
     {
         $title        = 'My Application';
         $siteName     = 'ARCANEDEV';
         $expectations = [
             "<title>{$title} - {$siteName}</title>",
-            '<meta property="og:title" content="'.$title.'">',
-            '<meta property="og:site_name" content="'.$siteName.'">',
-            '<meta name="twitter:title" content="'.$title.'">',
+            '<meta property="og:title" content="' . $title . '">',
+            '<meta property="og:site_name" content="' . $siteName . '">',
+            '<meta name="twitter:title" content="' . $title . '">',
         ];
 
         $this->seoHelper->setSiteName($siteName)
-                        ->setTitle($title);
+            ->setTitle($title);
 
         foreach ($expectations as $expected) {
             static::assertStringContainsString($expected, $this->seoHelper->render());
@@ -153,7 +154,7 @@ class SeoHelperTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_toggle_site_name_visibility(): void
     {
         $title    = 'My Application';
@@ -181,14 +182,14 @@ class SeoHelperTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_description(): void
     {
         $description  = 'ARCANEDEV super description';
         $expectations = [
-            '<meta name="description" content="'.$description.'">',
-            '<meta property="og:description" content="'.$description.'">',
-            '<meta name="twitter:description" content="'.$description.'">',
+            '<meta name="description" content="' . $description . '">',
+            '<meta property="og:description" content="' . $description . '">',
+            '<meta name="twitter:description" content="' . $description . '">',
         ];
 
         $this->seoHelper->setDescription($description);
@@ -199,11 +200,11 @@ class SeoHelperTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_keywords(): void
     {
         $keywords = $this->getSeoHelperConfig('keywords.default');
-        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
 
         $this->seoHelper->setKeywords($keywords); // Array
 
@@ -216,14 +217,14 @@ class SeoHelperTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->seoHelper);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_image(): void
     {
         $this->seoHelper->setImage($imageUrl = 'http://localhost/assets/img/logo.png');
 
         $expectations = [
-            '<meta property="og:image" content="'.$imageUrl.'">',
-            '<meta name="twitter:image" content="'.$imageUrl.'">'
+            '<meta property="og:image" content="' . $imageUrl . '">',
+            '<meta name="twitter:image" content="' . $imageUrl . '">'
         ];
 
         $rendered = $this->seoHelper->render();
@@ -233,14 +234,14 @@ class SeoHelperTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_url(): void
     {
         $this->seoHelper->setUrl($url = 'http://localhost/path');
 
         $expectations = [
-            '<link rel="canonical" href="'.$url.'">',
-            '<meta property="og:url" content="'.$url.'">'
+            '<link rel="canonical" href="' . $url . '">',
+            '<meta property="og:url" content="' . $url . '">'
         ];
 
         $rendered = $this->seoHelper->render();
@@ -250,7 +251,7 @@ class SeoHelperTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_all(): void
     {
         $output = $this->seoHelper->render();
@@ -258,7 +259,7 @@ class SeoHelperTest extends TestCase
         static::assertNotEmpty($output);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_all_with_html_string_object(): void
     {
         $output = $this->seoHelper->renderHtml();
@@ -267,7 +268,7 @@ class SeoHelperTest extends TestCase
         static::assertNotEmpty($output->toHtml());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_enable_and_disable_open_graph(): void
     {
         $needle = '<meta property="og:';
@@ -301,7 +302,7 @@ class SeoHelperTest extends TestCase
         static::assertStringContainsString($needle, $this->seoHelper->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_enable_and_disable_twitter_card(): void
     {
         $needle = '<meta name="twitter:';

@@ -6,6 +6,7 @@ namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\Keywords;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     KeywordsTest
@@ -47,7 +48,7 @@ class KeywordsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -61,7 +62,7 @@ class KeywordsTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_default_content(): void
     {
         $content = $this->getDefaultContent();
@@ -70,7 +71,7 @@ class KeywordsTest extends TestCase
         static::assertSame($content, $this->keywords->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_get_content(): void
     {
         $content = $this->getDefaultContent();
@@ -97,7 +98,7 @@ class KeywordsTest extends TestCase
         static::assertEmpty($this->keywords->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_a_keyword(): void
     {
         $content = $this->getDefaultContent();
@@ -114,7 +115,7 @@ class KeywordsTest extends TestCase
         static::assertSame($content, $this->keywords->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_many_keywords(): void
     {
         $content = $this->getDefaultContent();
@@ -133,11 +134,11 @@ class KeywordsTest extends TestCase
         static::assertSame($content, $this->keywords->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render(): void
     {
         $content  = $this->getDefaultContent();
-        $expected = '<meta name="keywords" content="'.implode(', ', $content).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $content) . '">';
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->keywords);
         static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());
@@ -168,7 +169,7 @@ class KeywordsTest extends TestCase
         static::assertEmpty($this->keywords->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_make(): void
     {
         $keywords       = $this->getDefaultContent();
@@ -176,7 +177,7 @@ class KeywordsTest extends TestCase
 
         static::assertSame($keywords, $this->keywords->getContent());
 
-        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->keywords);
         static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());

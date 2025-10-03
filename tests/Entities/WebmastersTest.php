@@ -6,6 +6,7 @@ namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\Webmasters;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     WebmastersTest
@@ -47,7 +48,7 @@ class WebmastersTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -61,7 +62,7 @@ class WebmastersTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_defaults(): void
     {
         $expectations = [
@@ -78,7 +79,7 @@ class WebmastersTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_make_and_add(): void
     {
         $this->webmasters = Webmasters::make([
@@ -98,7 +99,7 @@ class WebmastersTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_skip_unsupported_webmasters(): void
     {
         $this->webmasters = Webmasters::make([
@@ -109,7 +110,7 @@ class WebmastersTest extends TestCase
         static::assertEmpty((string) $this->webmasters);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_reset(): void
     {
         static::assertNotEmpty($this->webmasters->render());

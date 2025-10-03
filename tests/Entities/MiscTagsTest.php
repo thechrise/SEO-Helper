@@ -6,6 +6,7 @@ namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\MiscTags;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     MiscTagsTest
@@ -49,7 +50,7 @@ class MiscTagsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -63,12 +64,12 @@ class MiscTagsTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_canonical(): void
     {
         $this->misc->setUrl($url = 'http://laravel.com');
 
-        $expected = '<link rel="canonical" href="'.$url.'">';
+        $expected = '<link rel="canonical" href="' . $url . '">';
 
         static::assertStringContainsString($expected, $this->misc->render());
         static::assertStringContainsString($expected, (string) $this->misc);
@@ -79,7 +80,7 @@ class MiscTagsTest extends TestCase
         static::assertEmpty((string) $this->misc);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_robots(): void
     {
         $expected = '<meta name="robots" content="noindex, nofollow">';
@@ -93,7 +94,7 @@ class MiscTagsTest extends TestCase
         static::assertEmpty((string) $this->misc);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_links(): void
     {
         $author    = 'https://plus.google.com/+AuthorProfile';
@@ -104,8 +105,8 @@ class MiscTagsTest extends TestCase
         ]);
 
         $expectations = [
-            '<link rel="author" href="'.$author.'">',
-            '<link rel="publisher" href="'.$publisher.'">',
+            '<link rel="author" href="' . $author . '">',
+            '<link rel="publisher" href="' . $publisher . '">',
         ];
 
         foreach ($expectations as $expected) {
@@ -114,11 +115,11 @@ class MiscTagsTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render(): void
     {
         $robots    = '<meta name="robots" content="noindex, nofollow">';
-        $canonical = '<link rel="canonical" href="'.$this->baseUrl.'">';
+        $canonical = '<link rel="canonical" href="' . $this->baseUrl . '">';
         $viewport  = '<meta name="viewport" content="width=device-width, initial-scale=1">';
 
         $output = $this->misc->render();
@@ -137,27 +138,27 @@ class MiscTagsTest extends TestCase
 
         static::assertSame(implode(PHP_EOL, [
             $robots,
-            '<link rel="author" href="'.$author.'">',
-            '<link rel="publisher" href="'.$publisher.'">',
+            '<link rel="author" href="' . $author . '">',
+            '<link rel="publisher" href="' . $publisher . '">',
         ]), $this->misc->render());
 
         $this->misc->setUrl($this->baseUrl);
 
         static::assertSame(implode(PHP_EOL, [
             $robots,
-            '<link rel="author" href="'.$author.'">',
-            '<link rel="publisher" href="'.$publisher.'">',
-            '<link rel="canonical" href="'.$this->baseUrl.'">',
+            '<link rel="author" href="' . $author . '">',
+            '<link rel="publisher" href="' . $publisher . '">',
+            '<link rel="canonical" href="' . $this->baseUrl . '">',
         ]), $this->misc->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_remove_and_reset_tags(): void
     {
         static::assertNotEmpty($this->misc->render());
 
         $robots    = '<meta name="robots" content="noindex, nofollow">';
-        $canonical = '<link rel="canonical" href="'.$this->baseUrl.'">';
+        $canonical = '<link rel="canonical" href="' . $this->baseUrl . '">';
         $viewport  = '<meta name="viewport" content="width=device-width, initial-scale=1">';
 
         $output = $this->misc->render();
@@ -216,7 +217,7 @@ class MiscTagsTest extends TestCase
         static::assertEmpty($this->misc->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_make(): void
     {
         $this->misc = MiscTags::make([
